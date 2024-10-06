@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style type="text/css">
+            h1 {color:#fbffd2}
+            h2 {color:#fbffd2}
+            body {background-color:#ec8c8c; text-align:center}
+        </style>
+        <title>Joe's Hotdogs</title>
+    </head>
+    <body>
+        <h1>Joe's Hotdog Stand</h1>
+        <h2>The best hotdog you've ever had - guaranteed!</h2>
+
+        <strong>Your Order:</strong>
+        <br> <br>
+        <script language="javascript">
+            const dogPrice = 4.80
+            const friesPrice = 3.95
+            const sodaPrice = 1.99
+
+            numDogs = parseInt(prompt('How many hotdogs would you like?'))
+            numFries = parseInt(prompt('How many fries would you like?'))
+            numSoda = parseInt(prompt('How many drinks would you like?'))
+
+
+            function showMoney(money) {
+                roundedMoney = Math.round(money * 100) / 100
+                roundString = roundedMoney.toString()
+                // if the decimal is the last character
+                if (roundString.indexOf('.') == -1) {
+                    roundString = roundString + '.00'
+                } else {
+                    decimal = roundString.split('.')[1]
+                    // if the part after the decimal is only 1 digit
+                    if (decimal.length == 1) {
+                        roundString = roundString + '0'
+                    }
+                }
+                return roundString
+            }
+
+            dogTotal = showMoney(numDogs * dogPrice)
+            friesTotal = showMoney(numFries * friesPrice)
+            sodaTotal = showMoney(numSoda * sodaPrice)
+            subtotal = parseFloat(dogTotal) + parseFloat(friesTotal) + parseFloat(sodaTotal)
+
+            subBeforeDis = showMoney((parseFloat(dogTotal) + parseFloat(friesTotal) + parseFloat(sodaTotal)) )
+            
+            let discount = 0.00
+            //Joe's special offer
+            if (subtotal >= 25) {
+                discount = showMoney(subtotal * 0.1)
+                subtotal = parseFloat(showMoney(subtotal * 0.9))
+            }
+            //MA tax
+            tax = showMoney(subtotal * 0.0625)
+            total = showMoney(subtotal + parseFloat(tax))
+
+
+            //display the totals
+            document.write('Hot Dog Quantity: ' + numDogs + '<br>')
+            document.write('Total Hot Dog Price: $' + dogTotal + '<br>')
+            document.write('Fries Quantity: ' + numFries + '<br>')
+            document.write('Total Fries Price: $' + friesTotal + '<br>')
+            document.write('Soda Quantity: ' + numSoda + '<br>')
+            document.write('Total Drinks Price: $' + sodaTotal + '<br><br>')
+            document.write('Subtotal Before Discount: $' + subBeforeDis + '<br>')
+            if (discount != 0) {
+                document.write("Joe's Special Offer Discount: $" + discount + '<br>')
+            }
+            document.write('Subtotal After Discount: $' + subtotal + '<br>')
+            document.write('Tax Amount: $' + tax + '<br><br>') 
+            document.write('<strong>FINAL TOTAL: $' + total)
+            
+            
+
+        </script>
+    </body>
+</html>
